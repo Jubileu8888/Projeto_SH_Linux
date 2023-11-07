@@ -1,0 +1,3 @@
+o comando ssh user@ip tera que ser executado e pedir a senha para o usuario, depois ira ter que da
+o comando su remotamente e pedir a senha novamente para o usuario ai depois que faz a execução do 
+script de desligamento do computador destino.
