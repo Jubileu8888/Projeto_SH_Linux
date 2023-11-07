@@ -25,7 +25,6 @@ case $op in
         echo "Lista de todos os ips disponiveis da sua rede local."
         cat ips.txt
 
-
         echo "------------------------------------------------------------"
         echo "-------------------Verificação do ping----------------------"
         echo "------------------------------------------------------------"
@@ -51,7 +50,7 @@ case $op in
 ip_file="ips.txt"
 
 
-ssh_user="seu_usuario_ssh"
+ssh_user="jaku"
 
 shutdown_script="~/shutdown_script.sh"
 
@@ -62,7 +61,6 @@ if [ -f "$ip_file" ]; then
 
     ssh "$ssh_user@$ip" "$shutdown_script"
     
-
     if [ $? -eq 0 ]; then
       echo "Desligamento bem-sucedido para o IP $ip."
     else
@@ -101,5 +99,29 @@ fi
 
     iptables -A OUTPUT -o "$network_interface" -d "$allowed_site" -j ACCEPT
     ;;
+  5)
+    echo "------------------------------------------------------------"
+    echo "----------------------Regras Firewall-----------------------"
+    echo "------------------------------------------------------------"
+    echo
+    echo
+    iptables -L
+    ;;
+  6)
+    echo "------------------------------------------------------------"
+    echo "------------------Desfazer regra Firewall-------------------"
+    echo "------------------------------------------------------------"
+    echo
+    echo
+    echo "Digite o número do tipo da regra que você quer desfazer"
+    echo "1-INPUT"
+    echo "2-OUTPUT"
+    echo "3-FORWARD"
+    echo "4-PREROUTING"
+    echo "5-POSTROUTING"
+    read -p "Digite uma opção:" op2
+      
+    ;;
+
 esac
 #fim do case
