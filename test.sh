@@ -1,10 +1,5 @@
 #!/bin/bash
 
-#caso o usuario tente selecionar outra opcao antes de verificar os computadores ligados.
-arp-scan --localnet | awk '/^[0-9]+.[0-9]+.[0-9]+.[0-9]+/ {print $1}' > ips.txt
-ifconfig | grep -A1 "$(ip r | grep default | awk '{print $5}')" | awk '/netmask/ {print $4}' > mascara.txt
-echo "Lista de todos os ips disponiveis da sua rede local."
-cat ips.txt
 
 
 echo "------------------------------------------------------------"
