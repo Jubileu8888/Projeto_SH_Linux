@@ -1,5 +1,12 @@
 #!/bin/bash
 
+#caso o usuario tente selecionar outra opcao antes de verificar os computadores ligados.
+arp-scan --localnet | awk '/^[0-9]+.[0-9]+.[0-9]+.[0-9]+/ {print $1}' > ips.txt
+ifconfig | grep -A1 "$(ip r | grep default | awk '{print $5}')" | awk '/netmask/ {print $4}' > mascara.txt
+echo "Lista de todos os ips disponiveis da sua rede local."
+cat ips.txt
+
+
 echo "------------------------------------------------------------"
 echo "---------------------Digite uma opção-----------------------"
 echo "------------------------------------------------------------"
@@ -47,31 +54,30 @@ case $op in
     echo "-------------------Desligar computadores--------------------"
     echo "------------------------------------------------------------"
 
+
+
 ip_file="ips.txt"
 
 
-ssh_user="jaku"
+ssh_user="admin"
 
-shutdown_script="~/shutdown_script.sh"
 
-# verificando arquivo dos ips
-if [ -f "$ip_file" ]; then
-#iniciando processo de desligar
-  while IFS= read -r ip; do
+ssh_password="admin"
 
-    ssh "$ssh_user@$ip" "$shutdown_script"
+
+while IFS= read -r ip; do
+
+    ssh -p "$ssh_password"
+    ssh -n -t "$ssh_user@$ip" "echo '$ssh_password' | sudo -S nohup init 0"
     
     if [ $? -eq 0 ]; then
-      echo "Desligamento bem-sucedido para o IP $ip."
+        echo "Desligamento bem-sucedido para o IP $ip."
     else
-      echo "Falha ao desligar o IP $ip."
+        echo "Falha ao desligar o IP $ip."
     fi
-  done < "$ip_file"
-else
-  echo "Arquivo 'ips.txt' não encontrado."
-fi
+done < "$ip_file"
+
     ;;
-    
 # fimop2
 # comeco op3
 3)
