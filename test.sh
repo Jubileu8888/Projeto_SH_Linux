@@ -7,6 +7,7 @@ echo "------------------------------------------------------------"
 # opções
 echo "1-Indentificar quais computadores estão ligados."
 echo "2-Desligar os computadores da rede."
+echo "3-Sair."
 echo "Digite uma opção: "
 read op
 clear
@@ -92,6 +93,10 @@ done < "$ip_file"
 sleep 3
 clear
 bash ./test.sh
+    ;;
+    3)
+    echo "Saindo do progama."
+    exit
     ;;
 # fimop2
 esac
