@@ -31,4 +31,4 @@ Contribuições são bem-vindas! Sinta-se à vontade para sugerir melhorias ou n
 
 ## Quem Fez
 
-Este script foi desenvolvido por [Seu Nome ou Apelido](https://github.com/seu-usuario-do-github).
+Este script foi desenvolvido por [Jubileu8888](https://github.com/Jubileu8888).
